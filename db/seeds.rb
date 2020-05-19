@@ -36,3 +36,10 @@ game_2.update(price: 3999)
 genre_rpg = Game.where(genre: "Role-playing (RPG)")
 genre_rpg.update_all "price = 2999"
 
+id_3 = Game.find_by(id: 3)
+id_3.destroy
+
+delete_adventure = Game.find_by(genre: "Adventure")
+delete_adventure.destroy
+
+Game.destroy_all
