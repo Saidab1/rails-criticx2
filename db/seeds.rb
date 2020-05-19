@@ -25,3 +25,14 @@ games = [{name: "Zombie Driver: Immortal Edition", genre: "Racing", price: 5999,
 games.each do |game|
   Game.create(game)
 end
+
+find_game = Game.find_by(name: "Borderlands 3")
+find_game.update(genre: "Shooter")
+find_game.save
+
+game_2 = Game.find_by(name: "Pokémon Shield")
+game_2.update(price: 3999)
+
+genre_rpg = Game.where(genre: "Role-playing (RPG)")
+genre_rpg.update_all "price = 2999"
+
