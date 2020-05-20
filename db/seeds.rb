@@ -15,6 +15,8 @@ game.price = 5999
 game.release_date = "2019-09-13"
 game.save
 
+company = Company.find_or_create_by(name: "Saida", description: "My company", start_date: Time.now, country: "Peru")
+
 games = [{name: "Zombie Driver: Immortal Edition", genre: "Racing", price: 5999, release_date: "2019-Jul-25"},
          {name: "Remnant: From the Ashes", genre: "Shooter", price: 6999, release_date: "2019-Aug-20"},
          {name: "Monster Hunter: World - Iceborne", genre: "Adventure", price: 6999, release_date: "2019-Sep-06"},
@@ -23,23 +25,10 @@ games = [{name: "Zombie Driver: Immortal Edition", genre: "Racing", price: 5999,
          {name: "Children of Morta", genre: "Role-playing (RPG)", price: 6999, release_date: "2019-Sep-03"}]
 
 games.each do |game|
-  Game.create(game)
+  game = Game.new(game)
+  game.company = company
+  game.save!
+rescue => e
+  p e
+  p game
 end
-
-find_game = Game.find_by(name: "Borderlands 3")
-find_game.update(genre: "Shooter")
-find_game.save
-
-game_2 = Game.find_by(name: "Pokémon Shield")
-game_2.update(price: 3999)
-
-genre_rpg = Game.where(genre: "Role-playing (RPG)")
-genre_rpg.update_all "price = 2999"
-
-id_3 = Game.find_by(id: 3)
-id_3.destroy
-
-delete_adventure = Game.find_by(genre: "Adventure")
-delete_adventure.destroy
-
-Game.destroy_all
