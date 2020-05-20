@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_19_221020) do
+ActiveRecord::Schema.define(version: 2020_05_20_005711) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_05_19_221020) do
     t.integer "game_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "title"
     t.index ["game_id"], name: "index_critics_on_game_id"
   end
 
@@ -35,7 +36,10 @@ ActiveRecord::Schema.define(version: 2020_05_19_221020) do
     t.string "genre"
     t.integer "price"
     t.date "release_date"
+    t.integer "company_id", null: false
+    t.index ["company_id"], name: "index_games_on_company_id"
   end
 
   add_foreign_key "critics", "games"
+  add_foreign_key "games", "companies"
 end
